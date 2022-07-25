@@ -42,10 +42,11 @@ class Soupify:
             title = title_encode.decode()
             li_dict['title'] = title
            
-            # I am passing the html element itself as to my understanding that
-            # was what was requested in the task
-            # i.e: description(in html)
-            li_dict['description'] = str(l.find('ul', attrs={'class': 'date-location'}))
+            
+            des_html = l.find('strong').get_text().encode("ascii", "ignore")
+            description = des_html.decode()
+            li_dict['description'] = description
+            # li_dict['description'] = str(l.find('ul', attrs={'class': 'date-location'}))
 
             # Some prices are in text, this was not handled as I do not understand the language
             price_div = l.find('div', attrs={'class': 'price'}).get_text()
